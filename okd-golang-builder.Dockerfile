@@ -8,13 +8,18 @@ ARG GOPATH
 
 ENV container=oci \
     GOPATH=${GOPATH:-/go} \
-    GOMAXPROCS=8
+    GOMAXPROCS=8 \
+    PATH=/go/bin:${PATH}
 
-RUN mkdir -p /go/src/ && \
-    yum upgrade --refresh -y && \
-    yum install -y --enablerepo=* --disablerepo=nfv-source --setopt=skip_missing_names_on_install=False --setopt=skip_if_unavailable=True \
+RUN set -x; mkdir -p /go/src/ && \
+    yum install -q -y yum-utils && \
+    yum-config-manager --enable '*' && \
+    yum-config-manager --setopt=skip_if_unavailable=True --save && \
+    yum-config-manager --disable nfv-source && \
+    yum install -q -y --setopt=skip_missing_names_on_install=False \
         bc file findutils gpgme git hostname lsof make socat tar tree util-linux wget which zip \
-        go-toolset-1.18.2 openssl openssl-devel systemd-devel gpgme-devel libassuan-devel && \
+        go-toolset-1.18.4 gcc-toolset-12 openssl openssl-devel systemd-devel \
+        gpgme-devel libassuan-devel && \
     yum clean all && \
     # goversioninfo is not shipped as RPM in Stream9, so install it with go instead
     go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest
