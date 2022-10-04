@@ -16,6 +16,7 @@ RUN set -x; mkdir -p /go/src/ \
     && yum install -y yum-utils \
     && yum-config-manager --enable '*' \
     && yum-config-manager --save \
+        --setopt=install_weak_deps=False \
         --setopt=skip_missing_names_on_install=False \
         --setopt=*.skip_if_unavailable=True \
     && yum upgrade --refresh -y \
