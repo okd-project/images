@@ -29,7 +29,7 @@ RUN set -x; mkdir -p /go/src/ \
         https://kojihub.stream.centos.org/kojifiles/packages/golang/1.19.1/2.el9/noarch/golang-src-1.19.1-2.el9.noarch.rpm \
     && yum clean all \
     # goversioninfo is not shipped as RPM in Stream9, so install it with go instead
-    && go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest
+    && GOFLAGS='' go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest
 
 LABEL \
         io.k8s.description="This is a golang builder image for building OKD components." \
