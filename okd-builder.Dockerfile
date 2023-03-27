@@ -10,7 +10,7 @@ ENV container=oci \
     GOFLAGS='-mod=vendor' \
     GOPATH=${GOPATH:-/go} \
     GOMAXPROCS=8 \
-    PATH=/go/bin:${PATH}
+    PATH=/go/bin:/opt/app-root/src/node_modules/.bin:${PATH}
 
 RUN set -x; mkdir -p /go/src/ \
     && yum install -y yum-utils \
@@ -26,7 +26,10 @@ RUN set -x; mkdir -p /go/src/ \
         systemd-devel gpgme-devel libassuan-devel \
     && yum clean all \
     # goversioninfo is not shipped as RPM in Stream9, so install it with go instead
-    && GOFLAGS='' go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest
+    && GOFLAGS='' go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest \
+    && chmod +x /usr/bin/*
+
+WORKDIR /opt/app-root/src
 
 LABEL \
         io.k8s.description="This is a golang builder image for building OKD components." \
