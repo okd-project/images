@@ -16,6 +16,8 @@ ENV container=oci \
 ENV NODE_PATH=${NVM_DIR}/v${NODE_VERSION}/lib/node_modules \
     PATH=/go/bin:/opt/app-root/src/node_modules/.bin:${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
 
+COPY okd-builder-root/ /
+
 RUN set -x; mkdir -p /go/src/ \
     && yum install -y yum-utils \
     && yum-config-manager --enable '*' \
