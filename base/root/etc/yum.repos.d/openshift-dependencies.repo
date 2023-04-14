@@ -1,0 +1,8 @@
+[openshift-dependencies]
+name=Openshift dependencies
+baseurl=https://mirror.openshift.com/pub/openshift-v4/$basearch/dependencies/rpms/$ocpversion-el9-beta/
+gpgcheck=0
+repo_gpgcheck=0
+metadata_expire=6h
+countme=1
+enabled=1
