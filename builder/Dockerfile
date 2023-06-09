@@ -30,6 +30,9 @@ RUN set -x; mkdir -p /go/src/ \
         bc file findutils gpgme git hostname lsof make socat tar tree util-linux wget which zip \
         gcc-toolset-12 go-toolset openssl openssl-devel \
         systemd-devel gpgme-devel libassuan-devel \
+        https://kojihub.stream.centos.org/kojifiles/packages/golang/1.20.4/1.el9/$(uname -m)/golang-1.20.4-1.el9.$(uname -m).rpm \
+        https://kojihub.stream.centos.org/kojifiles/packages/golang/1.20.4/1.el9/$(uname -m)/golang-bin-1.20.4-1.el9.$(uname -m).rpm \
+        https://kojihub.stream.centos.org/kojifiles/packages/golang/1.20.4/1.el9/noarch/golang-src-1.20.4-1.el9.noarch.rpm \
     && yum clean all \
     # goversioninfo is not shipped as RPM in Stream9, so install it with go instead
     && GOFLAGS='' go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest \
