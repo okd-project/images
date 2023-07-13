@@ -19,7 +19,7 @@ ENV NODE_PATH=${NVM_DIR}/v${NODE_VERSION}/lib/node_modules \
 COPY root/ /
 
 RUN set -x; mkdir -p /go/src/ \
-    && yum install -y yum-utils \
+    && yum install -y yum-utils centos-release-okd-4.14 \
     && yum-config-manager --enable '*' \
     && yum-config-manager --save \
         --setopt=install_weak_deps=False \
@@ -29,10 +29,8 @@ RUN set -x; mkdir -p /go/src/ \
     && yum install -y \
         bc file findutils gpgme git hostname lsof make socat tar tree util-linux wget which zip \
         gcc-toolset-12 go-toolset openssl openssl-devel \
-        systemd-devel gpgme-devel libassuan-devel \
+        systemd-devel gpgme-devel libassuan-devel golang-github-josephspurrier-goversioninfo \
     && yum clean all \
-    # goversioninfo is not shipped as RPM in Stream9, so install it with go instead
-    && GOFLAGS='' go install github.com/josephspurrier/goversioninfo/cmd/goversioninfo@latest \
     && chmod +x /usr/bin/*
 
 RUN mkdir -p "${NVM_DIR}" && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
