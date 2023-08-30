@@ -28,7 +28,7 @@ RUN set -x; mkdir -p /go/src/ \
     && yum upgrade --refresh -y \
     && yum install -y \
         bc file findutils gpgme git hostname lsof make socat tar tree util-linux wget which zip \
-        gcc-toolset-12 go-toolset openssl openssl-devel compat-openssl11\
+        gcc-toolset-12 go-toolset openssl openssl-devel compat-openssl11 \
         systemd-devel gpgme-devel libassuan-devel golang-github-josephspurrier-goversioninfo \
     && yum clean all \
     && chmod +x /usr/bin/*
