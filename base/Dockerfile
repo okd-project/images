@@ -17,7 +17,7 @@ RUN INSTALL_PKGS=" \
       python-unversioned-command" && \
     echo 'skip_missing_names_on_install=0' >> /etc/yum.conf && \
     echo "${OCP_VERSION}" > /etc/yum/vars/ocpversion && \
-    dnf install --nodocs --setopt=insatll_weak_deps=False -y ${INSTALL_PKGS} && \
+    dnf install --nodocs --setopt=install_weak_deps=False -y ${INSTALL_PKGS} && \
     dnf clean all && rm -rf /var/cache/* && \
     mkdir -p /var/lib/origin
 
